@@ -61,3 +61,10 @@ end
 def add_pet_to_customer(array, hash)
   return array[:pets].push(hash)
 end
+
+def customer_can_afford_pet(array, hash)
+  if array[:cash] < hash[:price]
+    return false
+  end
+  return true
+end
