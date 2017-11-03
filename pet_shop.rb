@@ -17,3 +17,27 @@ end
 def increase_pets_sold(hash1, amount)
   return hash1[:admin][:pets_sold] += amount
 end
+
+def stock_count(hash)
+  pet_count = hash[:pets].length
+  return pet_count
+end
+
+def pets_by_breed(hash, breed)
+  count_of_pets = []
+  for pets in hash[:pets]
+    if pets[:breed] == breed
+      count_of_pets.unshift(breed)
+    end
+  end
+  return count_of_pets
+end
+
+def find_pet_by_name(hash, name)
+  for pet in hash[:pets]
+    if pet[:name] == name
+      return pet
+    end
+  end
+  return nil
+end
