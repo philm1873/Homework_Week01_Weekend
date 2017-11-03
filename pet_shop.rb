@@ -7,7 +7,7 @@ def total_cash(hash)
 end
 
 def add_or_remove_cash(hash, amount)
-  return hash[:admin][:total_cash] += amount
+   hash[:admin][:total_cash] += amount
 end
 
 def pets_sold(hash)
@@ -67,4 +67,16 @@ def customer_can_afford_pet(array, hash)
     return false
   end
   return true
+end
+
+def sell_pet_to_customer(pet_shop_hash, pet_hash, customer_element_of_array)
+
+  add_pet_to_customer(customer_element_of_array, pet_shop_hash)
+
+  add_or_remove_cash(pet_shop_hash , pet_hash[:price])
+
+  stock_count(pet_shop_hash)
+
+  increase_pets_sold(pet_shop_hash, 1)
+
 end
