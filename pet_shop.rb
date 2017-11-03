@@ -41,3 +41,23 @@ def find_pet_by_name(hash, name)
   end
   return nil
 end
+
+def remove_pet_by_name(hash, name)
+  for pet in hash[:pets]
+    if pet[:name] == name
+        hash[:pets].delete(pet)
+    end
+  end
+end
+
+def add_pet_to_stock(hash, new_pet)
+  return hash[:pets].push(new_pet)
+end
+
+def customer_pet_count(array)
+  return array[:pets].count
+end
+
+def add_pet_to_customer(array, hash)
+  return array[:pets].push(hash)
+end
