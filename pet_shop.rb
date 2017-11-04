@@ -72,10 +72,12 @@ end
 def sell_pet_to_customer(pet_shop_hash, pet_hash, customer_element_of_array)
   if pet_hash == nil
     return pet_hash
+  elsif customer_can_afford_pet(customer_element_of_array, pet_hash) == false
+    return p "Customer can't afford pet"  
   else
-    add_pet_to_customer(customer_element_of_array, pet_shop_hash)
-
     add_or_remove_cash(pet_shop_hash , pet_hash[:price])
+
+    add_pet_to_customer(customer_element_of_array, pet_shop_hash)
 
     stock_count(pet_shop_hash)
 
