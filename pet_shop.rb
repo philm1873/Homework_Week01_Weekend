@@ -1,31 +1,31 @@
-def pet_shop_name(hash)
- return hash[:name]
+def pet_shop_name(shop)
+ return shop[:name]
 end
 
-def total_cash(hash)
-  return hash[:admin][:total_cash]
+def total_cash(shop)
+  return shop[:admin][:total_cash]
 end
 
-def add_or_remove_cash(hash, amount)
-   hash[:admin][:total_cash] += amount
+def add_or_remove_cash(shop, amount)
+   shop[:admin][:total_cash] += amount
 end
 
-def pets_sold(hash)
-  return pets_sold = hash[:admin][:pets_sold]
+def pets_sold(shop)
+  return pets_sold = shop[:admin][:pets_sold]
 end
 
-def increase_pets_sold(hash1, amount)
-  return hash1[:admin][:pets_sold] += amount
+def increase_pets_sold(shop, amount)
+  return shop[:admin][:pets_sold] += amount
 end
 
-def stock_count(hash)
-  pet_count = hash[:pets].length
+def stock_count(shop)
+  pet_count = shop[:pets].length
   return pet_count
 end
 
-def pets_by_breed(hash, breed)
+def pets_by_breed(shop, breed)
   count_of_pets = []
-  for pets in hash[:pets]
+  for pets in shop[:pets]
     if pets[:breed] == breed
       count_of_pets.unshift(breed)
     end
@@ -42,45 +42,47 @@ def find_pet_by_name(hash, name)
   return nil
 end
 
-def remove_pet_by_name(hash, name)
-  for pet in hash[:pets]
+def remove_pet_by_name(shop, name)
+  for pet in shop[:pets]
     if pet[:name] == name
-        hash[:pets].delete(pet)
+        shop[:pets].delete(pet)
     end
   end
 end
 
-def add_pet_to_stock(hash, new_pet)
-  return hash[:pets].push(new_pet)
+def add_pet_to_stock(shop, new_pet)
+  return shop[:pets].push(new_pet)
 end
 
-def customer_pet_count(array)
-  return array[:pets].count
+def customer_pet_count(customer)
+  return customer[:pets].count
 end
 
-def add_pet_to_customer(array, hash)
-  return array[:pets].push(hash)
+def add_pet_to_customer(customer, pet)
+  return customer[:pets].push(pet)
 end
 
-def customer_can_afford_pet(array, hash)
-  if array[:cash] < hash[:price]
+#OPTIONAL
+
+def customer_can_afford_pet(customer, pet)
+  if customer[:cash] < pet[:price]
     return false
   end
   return true
 end
 
-def sell_pet_to_customer(pet_shop_hash, pet_hash, customer_element_of_array)
-  if pet_hash == nil
-    return pet_hash
-  elsif customer_can_afford_pet(customer_element_of_array, pet_hash) == false
-    return p "Customer can't afford pet"  
+def sell_pet_to_customer(shop, pet, customer)
+  if pet == nil
+    return p "No such pet in shop"
+  elsif customer_can_afford_pet(customer, pet) == false
+    return p "Customer can't afford pet"
   else
-    add_or_remove_cash(pet_shop_hash , pet_hash[:price])
+    add_or_remove_cash(shop, pet[:price])
 
-    add_pet_to_customer(customer_element_of_array, pet_shop_hash)
+    add_pet_to_customer(customer, shop)
 
-    stock_count(pet_shop_hash)
+    stock_count(shop)
 
-    increase_pets_sold(pet_shop_hash, 1)
+    increase_pets_sold(shop, 1)
   end
 end
